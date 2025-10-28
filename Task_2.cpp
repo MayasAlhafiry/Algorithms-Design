@@ -1,9 +1,24 @@
 #include <iostream>
-
+#include <vector>
 using namespace std;
 
 
 // task 2
+
+// Sequential Search
+int SequentialSearch(vector<int> v, int key) {
+    bool found = false;
+    for (int i = 0; i < v.size(); i++) {
+        if (v[i] == key) {
+            cout<<"the key found in index: " <<i;
+            found = true;
+        }
+    }
+    if (!found) {
+        cout<<"key not found";
+        return -1;
+    }
+}
 
 int recursive_sequential_search(int list[], int len, int value, int start=0) {
     int i = start;
@@ -36,7 +51,10 @@ int main() {
     cout << endl << index;
 
     int indx = recursive_binary_search(list, 5, 0, 5);
-    cout << endl << indx;
+    cout << endl << indx<<endl;
+
+    vector<int> numbers = {5, 3, 8, 6, 2, 7};
+    SequentialSearch(numbers, 3);
 
 
     return 0;
