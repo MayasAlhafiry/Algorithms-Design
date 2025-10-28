@@ -54,13 +54,32 @@ int fibonacci_DC (int n) {
     return resuilt[0][1];
 }
 
-// 
+// this is Fibonacci series using dynamic programming.
+long fib(int n) {
+    // where n is the position and u get the value
+    if (n<0) {
+        cout<<"Error in Fibonacci number"<<endl;
+    }
+    if (n == 0 || n == 1) {
+        return n;
+    }
+
+    long fibArray[n+1];
+    fibArray[0] = 0;
+    fibArray[1] = 1;
+    for (int i = 2; i <= n; i++) {
+        fibArray[i] = fibArray[i-1] + fibArray[i-2];
+    }
+    return fibArray[n];
+}
 
 
 
 int main() {
-    int n = fibonacci_DC(10);
-    cout << n;
+    int n=10;
+    cout << "Fibonacci of " << n << " using Divide and Conquer: " << fibonacci_DC(n) << endl;
+    cout << "Fibonacci of " << n << " using Dynamic Programming: " << fib(n) << endl;
+    
 
     return 0;
 }
