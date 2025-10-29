@@ -20,11 +20,12 @@ int SequentialSearch(vector<int> v, int key) {
     }
 }
 
-int recursive_sequential_search(int list[], int len, int value, int start=0) {
-    int i = start;
-    if (i==len) return -1;
-    if (list[i] == value) return i;
-    return recursive_sequential_search(list, len, value, ++start);
+int recursive_sequential_search(vector<int> list, int value) {
+    if (list.empty()) return -1;
+    if (list.front() == value) return 0;
+    int index = recursive_sequential_search(vector<int>(list.begin()+1, list.end()), value);
+    if (index == -1) return -1;
+    return index+1;
 }
 
 int recursive_binary_search(int list[], int value, int low, int high) {
@@ -45,18 +46,21 @@ int recursive_binary_search(int list[], int value, int low, int high) {
 
 
 int main() {
-    int list[] = {2, 4, 3, 7, 5, 7};
 
-    int index = recursive_sequential_search(list, 6, 5);
-    cout << endl << index;
+    int key;
+    cout << "search for: "; cin >> key;
 
-    int indx = recursive_binary_search(list, 5, 0, 5);
-    cout << endl << indx<<endl;
+    int list[] = {1, 2, 3, 5, 7, 9};
+    int indx = recursive_binary_search(list, key, 0, 5);
+    cout << "search by recursive binary search\n" << "the key " << key << " found in index: " << indx << endl << endl;
 
     vector<int> numbers = {5, 3, 8, 6, 2, 7};
-    SequentialSearch(numbers, 3);
+
+    int index = recursive_sequential_search(numbers, key);
+    cout << "search by recursive sequential search\n" << "the key " << key <<" found in index: " << indx << endl << endl;
+
+    SequentialSearch(numbers, key);
 
 
     return 0;
 }
-
