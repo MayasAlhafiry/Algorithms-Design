@@ -103,16 +103,18 @@ public:
 
 
 };
-//class PriorityQueue
+
 class PriorityQueue {
 private:
     MaxHeap heap;
-    void dequeueHeloer(int& value,int& Priority) {
+    // a dequeue helper 
+    void dequeueHelper(int& value,int& Priority) {
         if (heap.isEmpty()) {
             cout << "Heap is empty,nothing to remove" << endl;
         }
         heap.extractMax( value, Priority);
     }
+    // a peek helper 
     void peekHelper(int& value,int& Priority) {
         if (heap.isEmpty()) {
             cout << "Heap is empty,nothing to peek at" << endl;
@@ -121,20 +123,21 @@ private:
         heap.insert( value, Priority);
     }
 public:
+	//constuctor 
     PriorityQueue(int size) : heap(size) {
         cout << "PriorityQueue is created using heap class" << endl;
     }
-    // add the biggest value to the front
+    // add the value with the highest Priority to the front 
     void enqueue(int value,int Priority ) {
         heap.insert(value,Priority);
     }
-    // remove the first value , which is the highest priorty
+    // removed the value with the highest Priority used dequeueHelper
     void dequeue() {
         int value, Priority;
-        dequeueHeloer(value,Priority);
+        dequeueHelper(value,Priority);
         cout<<"removed value(used dequeue): "<<value<<" the value priority: "<<Priority<<endl;
     }
-    //checking the largest number without removing it , so i did use extractMax() from heap which returns and remove max and i did insert the value again
+    //checking the value with the biggest Priority used peekHelper
     int peek() {
         int value, Priority;
         peekHelper(value,Priority);
@@ -150,7 +153,6 @@ public:
     }
 
 };
-
 
 
 
