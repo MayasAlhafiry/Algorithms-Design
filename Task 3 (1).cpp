@@ -9,13 +9,13 @@ private:
 
     void heapifyDown(int index) {
         int largest = index;
-        int left = 2 * index + 1;
-        int right = 2 * index + 2;
+        int left = 2 * index + 1; // Index of the left child
+        int right = 2 * index + 2; // Index of the right child
 
-        if (left < count && arr[left] > arr[largest])
+        if (left < count && arr[left] > arr[largest]) // Check if the left child exists and is greater than the current largest
             largest = left;
 
-        if (right < count && arr[right] > arr[largest])
+        if (right < count && arr[right] > arr[largest]) // Check if the right child exists and is greater than the current largest
             largest = right;
 
         if (largest != index) {
@@ -26,8 +26,8 @@ private:
 
     void heapifyUp(int index) {
         int parent = (index - 1) / 2;
-        if (index > 0 && arr[index] > arr[parent]) {
-            swap(arr[index], arr[parent]);
+        if (index > 0 && arr[index] > arr[parent]) { // If the current node is not the root and it's greater than its parent
+            swap(arr[index], arr[parent]); // Swap the child with the parent
             heapifyUp(parent);
         }
     }
@@ -35,37 +35,37 @@ private:
 public:
     MaxHeap(int s) { //Constructor
         size = s;          // Set max size
-        arr = new int[size]; 
+        arr = new int[size];
         count = 0;    // Start empty
         cout << "Heap created successfully" << endl;
     }
 
 
     void insert(int value) {
-        if (count == size) {
+        if (count == size) { // Check if the heap is already full
             cout << "Heap is full!" << endl;
             return;
         }
-        arr[count] = value;
+        arr[count] = value; // Place the new value at the end of the heap
         heapifyUp(count);
-        count++;
+        count++;  // Increase the number of elements in the heap
     }
 
     int extractMax() {
-        if (count == 0) {
+        if (count == 0) { // Check if the heap is empty
             cout << "Heap is empty!" << endl;
             return -1;
         }
         int maxValue = arr[0];
         arr[0] = arr[count - 1];
-        count--;
+        count--; // Reduce the heap size because one element is removed
         heapifyDown(0);
         return maxValue;
     }
-    
+
 
     int extractMin() {
-        if (count == 0) {
+        if (count == 0) { // Check if the heap is empty
             cout << "Heap is empty!" << endl;
             return -1;
         }
@@ -74,12 +74,14 @@ public:
             if (arr[i] < minValue)
                 minValue = arr[i];
         }
+        count--; // Reduce the heap size because one element is removed
         return minValue;
     }
-     bool isEmpty() {
+    bool isEmpty() {
         if (count == 0) {
             return true;
-        } else {
+        }
+        else {
             return false;
         }
     }
@@ -95,19 +97,19 @@ public:
 };
 
 class PriorityQueue {
-  private:
+private:
     MaxHeap heap;
-    public:
+public:
     PriorityQueue(int size) : heap(size) {
-        cout<<"PriorityQueue is created using heap class"<<endl;
+        cout << "PriorityQueue is created using heap class" << endl;
     }
     // add the biggest value to the front
     void enqueue(int value) {
-      heap.insert(value);
+        heap.insert(value);
     }
-  // remove the first value , which is the highest priorty
+    // remove the first value , which is the highest priorty
     int dequeue() {
-      return heap.extractMax();
+        return heap.extractMax();
     }
     //checking the largest number without removing it , so i did use extractMax() from heap which returns and remove max and i did insert the value again
     int peek() {
@@ -122,7 +124,7 @@ class PriorityQueue {
     }
     //display what is inside the PriorityQueue
     void display() {
-         heap.display();
+        heap.display();
     }
 
 };
@@ -130,10 +132,10 @@ class PriorityQueue {
 
 void heapSort(int arr[], int n) {
     MaxHeap heap(n);
-    for (int i=0; i<n; i++) {
+    for (int i = 0; i < n; i++) {
         heap.insert(arr[i]);
     }
-    for (int i=n-1; i>=0; i--) {
+    for (int i = n - 1; i >= 0; i--) {
         arr[i] = heap.extractMax();
     }
 }
@@ -165,12 +167,11 @@ int main()
     pq.display();
     pq.dequeue();
     pq.display();
-   cout<< pq.peek()<<endl;
-   cout<<pq.isEmpty()<<endl;
+    cout << pq.peek() << endl;
+    cout << pq.isEmpty() << endl;
 
     return 0;
 }
-   
 
 
 
