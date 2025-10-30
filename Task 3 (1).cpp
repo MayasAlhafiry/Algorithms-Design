@@ -93,6 +93,7 @@ public:
 
 
 };
+
 class PriorityQueue {
   private:
     MaxHeap heap;
@@ -127,6 +128,17 @@ class PriorityQueue {
 };
 
 
+void heapSort(int arr[], int n) {
+    MaxHeap heap(n);
+    for (int i=0; i<n; i++) {
+        heap.insert(arr[i]);
+    }
+    for (int i=n-1; i>=0; i--) {
+        arr[i] = heap.extractMax();
+    }
+}
+
+
 
 int main()
 {
@@ -159,5 +171,6 @@ int main()
     return 0;
 }
    
+
 
 
