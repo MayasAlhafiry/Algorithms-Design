@@ -76,6 +76,13 @@ public:
         }
         return minValue;
     }
+     bool isEmpty() {
+        if (count == 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     void display() {
         cout << "Heap elements: ";
@@ -86,6 +93,39 @@ public:
 
 
 };
+class PriorityQueue {
+  private:
+    MaxHeap heap;
+    public:
+    PriorityQueue(int size) : heap(size) {
+        cout<<"PriorityQueue is created using heap class"<<endl;
+    }
+    // add the biggest value to the front
+    void enqueue(int value) {
+      heap.insert(value);
+    }
+  // remove the first value , which is the highest priorty
+    int dequeue() {
+      return heap.extractMax();
+    }
+    //checking the largest number without removing it , so i did use extractMax() from heap which returns and remove max and i did insert the value again
+    int peek() {
+        if (heap.isEmpty()) return -1;
+        int value = heap.extractMax();
+        heap.insert(value);
+        return value;
+    }
+    //checks if empty
+    bool isEmpty() {
+        return heap.isEmpty();
+    }
+    //display what is inside the PriorityQueue
+    void display() {
+         heap.display();
+    }
+
+};
+
 
 
 int main()
@@ -104,6 +144,17 @@ int main()
     cout << "Min element: " << heap.extractMin() << endl;
 
     heap.display();
+
+    PriorityQueue pq(10);
+    pq.enqueue(40);
+    pq.enqueue(30);
+    pq.enqueue(60);
+    pq.enqueue(20);
+    pq.display();
+    pq.dequeue();
+    pq.display();
+   cout<< pq.peek()<<endl;
+   cout<<pq.isEmpty()<<endl;
 
     return 0;
 }
