@@ -103,28 +103,42 @@ public:
 
 
 };
-
+//class PriorityQueue
 class PriorityQueue {
 private:
     MaxHeap heap;
+    void dequeueHeloer(int& value,int& Priority) {
+        if (heap.isEmpty()) {
+            cout << "Heap is empty,nothing to remove" << endl;
+        }
+        heap.extractMax( value, Priority);
+    }
+    void peekHelper(int& value,int& Priority) {
+        if (heap.isEmpty()) {
+            cout << "Heap is empty,nothing to peek at" << endl;
+        }
+        heap.extractMax( value, Priority);
+        heap.insert( value, Priority);
+    }
 public:
     PriorityQueue(int size) : heap(size) {
         cout << "PriorityQueue is created using heap class" << endl;
     }
     // add the biggest value to the front
-    void enqueue(int value) {
-        heap.insert(value);
+    void enqueue(int value,int Priority ) {
+        heap.insert(value,Priority);
     }
     // remove the first value , which is the highest priorty
-    int dequeue() {
-        return heap.extractMax();
+    void dequeue() {
+        int value, Priority;
+        dequeueHeloer(value,Priority);
+        cout<<"removed value(used dequeue): "<<value<<" the value priority: "<<Priority<<endl;
     }
     //checking the largest number without removing it , so i did use extractMax() from heap which returns and remove max and i did insert the value again
     int peek() {
-        if (heap.isEmpty()) return -1;
-        int value = heap.extractMax();
-        heap.insert(value);
-        return value;
+        int value, Priority;
+        peekHelper(value,Priority);
+        cout<<"largest Priority(used peek): "<<value<<" with priority: "<<Priority<<endl;
     }
     //checks if empty
     bool isEmpty() {
@@ -138,7 +152,9 @@ public:
 };
 
 
-void heapSort(int arr[], int n) {
+
+
+/*void heapSort(int arr[], int n) {
     MaxHeap heap(n);
     for (int i = 0; i < n; i++) {
         heap.insert(arr[i]);
@@ -146,7 +162,7 @@ void heapSort(int arr[], int n) {
     for (int i = n - 1; i >= 0; i--) {
         arr[i] = heap.extractMax();
     }
-}
+}*/
 
 
 
@@ -169,18 +185,19 @@ int main()
     int minValue = heap.extractMin();
     cout << "Min element (by value): " << minValue << endl;
     heap.display();
-   
-
+    //PriorityQueue test cases 
     PriorityQueue pq(10);
-    pq.enqueue(40);
-    pq.enqueue(30);
-    pq.enqueue(60);
-    pq.enqueue(20);
+    pq.enqueue(40, 2);
+    pq.enqueue(30, 5);
+    pq.enqueue(60, 1);
+    pq.enqueue(20, 3);
+    pq.display();
+    pq.peek();
     pq.display();
     pq.dequeue();
     pq.display();
-    cout << pq.peek() << endl;
-    cout << pq.isEmpty() << endl;
+
+
 
     return 0;
 }
