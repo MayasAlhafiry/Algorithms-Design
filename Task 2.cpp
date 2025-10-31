@@ -72,7 +72,7 @@ int recursive_binary_search(int list[], int value, int low, int high) {
 
 
 int main() {
-
+   cout<<"please note we are using 3 different lists so the answer may be different deppending on which list used in it"<<endl;
     int key;
     cout << "search for: "; cin >> key;
     int list[] = { 1, 2, 3, 5, 7, 9 };
@@ -116,4 +116,5 @@ int main() {
     return 0;
 
 }
+
 
