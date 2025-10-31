@@ -75,33 +75,45 @@ int main() {
 
     int key;
     cout << "search for: "; cin >> key;
-
     int list[] = { 1, 2, 3, 5, 7, 9 };
-    int indx = recursive_binary_search(list, key, 0, 5);
-    cout << "search by recursive binary search\n" << "the key " << key << " found in index: " << indx << endl << endl;
-
     vector<int> numbers = { 5, 3, 8, 6, 2, 7 };
-
-    int index = recursive_sequential_search(numbers, key);
-    cout << "search by recursive sequential search\n" << "the key " << key << " found in index: " << indx << endl << endl;
-
-    SequentialSearch(numbers, key);
-
-
-    // Iterative Binary Search using vector
     vector<int> sorted_list = { 1, 2, 3, 5, 7, 9 };
+
+    cout << "Sequential Search:" << endl;
+    SequentialSearch(numbers, key);
+    cout<<endl;
+    //Recursive Sequential Search
+    cout<<"Recursive Sequential Search"<<endl;
+    int index = recursive_sequential_search(numbers, key);
+    if (index != -1) {
+        cout << "Search by recursive sequential search:" << endl;
+        cout << "The key " << key << " found in index: " << index << endl << endl;
+    } else {
+        cout << "Search by recursive sequential search:" << endl;
+        cout << "The key " << key << " not found" << endl << endl;
+    }
+    //Binary Search
+    cout<<"Binary Search:"<<endl;
     int index2 = binary_search(sorted_list, key);
     if (index2 != -1) {
-        cout << endl;
-        cout << "Iterative Binary Search Key: " << key << " found at index: " << index2 << endl;
+        cout << "Iterative Binary Search:" << endl;
+        cout << "Key: " << key << " found at index: " << index2 << endl;
+    } else {
+        cout << "Iterative Binary Search:" << endl;
+        cout << "Key not found" << endl;
     }
-    else
-        cout << "  Iterative Binary Search Key not found  "<<endl;
-
-
+    //Recursive Binary Search
+    cout<<"Recursive Binary Search"<<endl;
+    int indx = recursive_binary_search(list, key, 0, 5);
+    if (indx != -1) {
+        cout << "Search by recursive binary search:" << endl;
+        cout << "The key " << key << " found in index: " << indx << endl << endl;
+    } else {
+        cout << "Search by recursive binary search:" << endl;
+        cout << "The key " << key << " not found" << endl << endl;
+    }
 
     return 0;
 
 }
-
 
