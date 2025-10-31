@@ -16,7 +16,7 @@ void SequentialSearch(vector<int> v, int key) {
     }
     if (!found) {
         cout << "key not found";
-        return -1;
+       
     }
 }
 
@@ -101,3 +101,4 @@ int main() {
     return 0;
 
 }
+
