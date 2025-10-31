@@ -6,16 +6,18 @@ using namespace std;
 // task 2
 
 // Sequential Search
-void SequentialSearch(vector<int> v, int key) {
+int SequentialSearch(vector<int> v, int key) {
     bool found = false; // to check if the key was found or not 
     for (int i = 0; i < v.size(); i++) {
         if (v[i] == key) { // looking for the key inside the array
-            cout << "the key found in index: " << i;
+            cout << "the key found in index: " << i<<" using SequentialSearch "<<endl;
             found = true; //change found
+            return i;
         }
     }
     if (!found) {
         cout << "key not found";
+        return -1;
        
     }
 }
@@ -94,11 +96,12 @@ int main() {
         cout << "Iterative Binary Search Key: " << key << " found at index: " << index2 << endl;
     }
     else
-        cout << "Iterative Binary Search Key not found "<<endl;
+        cout << "  Iterative Binary Search Key not found  "<<endl;
 
 
 
     return 0;
 
 }
+
 
