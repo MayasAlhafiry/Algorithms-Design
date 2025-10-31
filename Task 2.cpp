@@ -6,12 +6,12 @@ using namespace std;
 // task 2
 
 // Sequential Search
-int SequentialSearch(vector<int> v, int key) {
-    bool found = false;
+void SequentialSearch(vector<int> v, int key) {
+    bool found = false; // to check if the key was found or not 
     for (int i = 0; i < v.size(); i++) {
-        if (v[i] == key) {
+        if (v[i] == key) { // looking for the key inside the array
             cout << "the key found in index: " << i;
-            found = true;
+            found = true; //change found
         }
     }
     if (!found) {
@@ -99,4 +99,5 @@ int main() {
 
 
     return 0;
+
 }
