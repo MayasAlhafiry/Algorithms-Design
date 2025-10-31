@@ -28,8 +28,8 @@ private:
 
     void heapifyUp(int index) {
         int parent = (index - 1) / 2;
-        if (index > 0 && priorities[index] > priorities[parent]) { 
-            swap(priorities[index], priorities[parent]); 
+        if (index > 0 && priorities[index] > priorities[parent]) {
+            swap(priorities[index], priorities[parent]);
             swap(values[index], values[parent]);
             heapifyUp(parent);
         }
@@ -41,7 +41,22 @@ public:
         count = 0;    // Start empty
         values = new int[size];
         priorities = new int[size];
-        cout << "Heap created successfully" << endl;  
+    }
+
+
+    void insert(int value) {
+        insert(value, value);
+    }
+
+    void insert(int value, int priority) {
+        if (count == size) { // Check if the heap is already full
+            cout << "Heap is full" << endl;
+            return;
+        }
+        values[count] = value; // Place the new value at the end of the heap
+        priorities[count] = priority;
+        heapifyUp(count);
+        count++;  // Increase the number of elements in the heap
     }
 
     int extractMax() {
@@ -55,18 +70,6 @@ public:
         count--;
         heapifyDown(0);
         return max;
-    }
-
-
-    void insert(int value, int priority) {
-        if (count == size) { // Check if the heap is already full
-            cout << "Heap is full" << endl;
-            return;
-        }
-        values[count] = value; // Place the new value at the end of the heap
-        priorities[count] = priority;
-        heapifyUp(count);
-        count++;  // Increase the number of elements in the heap
     }
 
     int extractMax(int& value, int& priority) {
@@ -100,6 +103,38 @@ public:
         heapifyDown(0);
         return minValue;
     }
+
+    int extractMin(int& value, int& priority) {
+    	//check if empty
+        if (count == 0) {
+            cout << "Heap is empty" << endl;
+            value = -1;
+            priority = -1;
+            return -1;
+        }
+
+        // Find min element , loop through priorities array to find min and getting the index
+        int minIndex = 0;
+        for (int i = 1; i < count; i++) {
+            if (priorities[i] < priorities[minIndex]) {
+                minIndex = i;
+            }
+        }
+       // setting value,priority with the min priority and its value
+        value = values[minIndex]; 
+        priority = priorities[minIndex];
+ 
+        values[minIndex] = values[count - 1]; // move the last element to min position so that min priority is in last leaf
+        priorities[minIndex] = priorities[count - 1];
+        count--; 
+
+        // Heapify from the position where we removed the element if its last index it will do nothing
+        heapifyDown(minIndex);
+        heapifyUp(minIndex); // need to heapify up in case we moved a larger element 
+
+        return value;
+    }
+
     bool isEmpty() {
         if (count == 0) {
             return true;
@@ -110,7 +145,7 @@ public:
     }
 
     void display() {
-        cout << "Heap elements: ";
+        cout << "Elements: ";
         for (int i = 0; i < count; i++)
             cout << "(" << values[i] << ", " << priorities[i] << ") ";
         cout << endl;
@@ -195,24 +230,57 @@ int main()
     heapSort(arr, 8);
     cout << "\n";
 
-
-    MaxHeap heap(10); // create heap of size 10 for example
-
-    heap.insert(40, 2);
-    heap.insert(30, 5);
-    heap.insert(60, 1);
-    heap.insert(20, 3);
+    //  MaxHeap
+    cout << "\nHeap Max\n";
+    MaxHeap heap(8);
+    heap.insert(6);
+    heap.insert(9);
+    heap.insert(5);
+    heap.insert(2);
+    heap.insert(4);
+    heap.insert(0);
+    heap.insert(5);
 
     heap.display();
-
-    int value, priority;
-    heap.extractMax(value, priority);
-    cout << "Max element: (" << value << ", " << priority << ")" << endl;
-
-    int minValue = heap.extractMin();
-    cout << "Min element (by value): " << minValue << endl;
+    int max = heap.extractMax();
+    cout << "Extract Max Element: " << max << endl;
     heap.display();
+
+    cout << endl;
+
+    heap.display();
+    int min = heap.extractMin();
+    cout << "Extract Min Element: " << min << endl;
+    heap.display();
+
+
+    //  MaxHeap
+    cout << "\nHeap Max with priority\n";
+    MaxHeap heapP(8);
+    heapP.insert(6, 4);
+    heapP.insert(9, 0);
+    heapP.insert(5, 2);
+    heapP.insert(2, 2);
+    heapP.insert(4, 5);
+    heapP.insert(0, 3);
+    heapP.insert(5, 6);
+
+    heapP.display();
+    int maxP, maxV;
+    heapP.extractMax(maxV, maxP);
+    cout << "Extract Max Priority Element: " << "(" << maxV << ", "<< maxP << ")" << endl;
+    heapP.display();
+
+    cout << endl;
+
+    heapP.display();
+    int minP, minV;
+    heapP.extractMin(minV, minP);
+    cout << "Extract Min Priority Element: " << "(" << minV << ", "<< minP << ")" << endl;
+    heapP.display();
+
     //PriorityQueue test cases
+    cout<<"priority queue test cases:"<<endl;
     PriorityQueue pq(10);
     pq.enqueue(40, 2);
     pq.enqueue(30, 5);
@@ -226,7 +294,5 @@ int main()
 
 
 
-
-    return 0;
+return 0;
 }
-
